@@ -1,0 +1,9 @@
+keys:
+  - cipher: chacha20-ietf-poly1305
+    id: "1"
+    port: 4433
+    secret: 492126a0-7de8-4d98-b26a-46e1b594abcd
+  - cipher: chacha20-ietf-poly1305
+    id: "2"
+    port: 4433
+    secret: 97f2aff1-709e-494f-813f-95aed13cd6bc

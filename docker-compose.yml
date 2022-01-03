@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  proxy:
+    image: proxy
+    container_name: proxy
+    hostname: 'proxy'
+    volumes:
+      - ./work:/work
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external:
+      name: proxy
+

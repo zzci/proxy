@@ -1,0 +1,11 @@
+#!/bin/sh
+name="ss"
+config="/work/config/$name"
+mkdir -p $config
+
+if [ ! -f "$config/config.yml" ]; then
+    echo "init $name configure"
+    cp -a /build/config/$name/config.yml $config
+fi
+
+exec outline-ss-server -config $config/config.yml
