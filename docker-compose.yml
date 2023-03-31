@@ -7,11 +7,10 @@ services:
     hostname: 'proxy'
     volumes:
       - ./work:/work
-    networks:
-      - proxy
-
-networks:
-  proxy:
-    external:
-      name: proxy
-
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - '4433:4433'
+      - '4434:4434'
+      - '4433:4433/udp'
+      - '4434:4434/udp'
