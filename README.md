@@ -40,3 +40,14 @@ sctl enable wireguard
 ```shell
 docker-compose up -d
 ```
+
+### Test wireguard client 
+
+```
+ip link add dev wg0 type wireguard
+ip addr add dev wg0 25.0.0.2/32
+ip link set wg0 up
+
+wg set wg0 private-key priv.key
+wg set wg0 peer iUQjotFkH46/afxCVvRkZfteTRpez02DaZHPQkHXEg0= endpoint 172.17.0.2:4434 allowed-ips 0.0.0.0/0
+```
