@@ -2,7 +2,7 @@ version: '3'
 
 services:
   proxy:
-    image: proxy
+    image: zzci/proxy
     container_name: proxy
     hostname: 'proxy'
     volumes:

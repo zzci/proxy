@@ -8,14 +8,4 @@ if [ ! -f "$config/config.json" ]; then
     cp -a /build/config/$name/config.json $config
 fi
 
-if [ ! -f "$config/geoip.dat" ]; then
-    echo "init $name configure"
-    cp -a /build/config/$name/geoip.dat $config
-fi
-
-if [ ! -f "$config/geosite.dat" ]; then
-    echo "init $name configure"
-    cp -a /build/config/$name/geosite.dat $config
-fi
-
-exec v2ray -config $config/config.json
+exec v2ray run -c $config/config.json

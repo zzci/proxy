@@ -1,0 +1,41 @@
+#!/bin/sh
+name="wireguard"
+config="/work/config/$name"
+mkdir -p $config
+
+# Check if the wg0 interface already exists
+if ip link show wg0 &>/dev/null; then
+  echo "wg0 interface already exists. Deleting it."
+  ip link del wg0
+fi
+
+# Create the wg0 interface
+ip link add wg0 type wireguard
+ip link set mtu 1420 up dev wg0
+ip address add dev wg0 25.0.0.1/8
+ip link set wg0 up
+
+# Create the WireGuard configuration file if it doesn't exist
+if [ ! -f "$config/wg.conf" ]; then
+  echo "Initializing $name configuration."
+  private_key=$(wg genkey)
+  echo "[Interface]
+PrivateKey = $private_key
+ListenPort = 4434" >$config/wg.conf
+fi
+
+# Apply the WireGuard configuration to the wg0 interface
+wg setconf wg0 $config/wg.conf
+
+# Check if IPv4 forwarding is enabled
+if [ "$(cat /proc/sys/net/ipv4/ip_forward)" -eq 0 ]; then
+  echo "IPv4 forwarding is not enabled. Enabling it now."
+  echo 1 > /proc/sys/net/ipv4/ip_forward
+fi
+
+echo "IPv4 forwarding is enabled."
+
+# Add iptables rule for NAT
+iptables -t nat -I POSTROUTING 1 -s 25.0.0.0/8 -o eth0 -j MASQUERADE
+
+echo "WireGuard started."

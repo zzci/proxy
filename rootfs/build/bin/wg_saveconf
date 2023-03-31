@@ -1,0 +1,8 @@
+#!/bin/sh
+config="/work/config/wireguard"
+mkdir -p "$config"
+
+# Save the current WireGuard configuration to the configuration file
+wg showconf wg0 | sed '/Endpoint/d' > "$config/wg.conf"
+
+echo "Current WireGuard configuration saved to $config/wg.conf."

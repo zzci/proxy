@@ -11,7 +11,11 @@ do
 done
 
 [ "$1" = "" ] && {
-    docker build --rm -t $NAME . 
+    docker build --rm -t $NAME .
+}
+
+[ "$1" = "test" ] && {
+    docker run --rm -ti -p 4433:4433 -p 4434:4434 -p 4434:4434/udp --name ${NAME}-test --cap-add=NET_ADMIN -v $PWD/work:/work $NAME sh
 }
 
 [ "$1" = "rm" ] && {

@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# Get the new peer's public key and IP address from the command-line arguments
+peer_public_key="$1"
+peer_ip="$2"
+
+# Check if the public key and IP address are provided
+if [[ -z "$peer_public_key" || -z "$peer_ip" ]]; then
+  echo "Usage: $0 <peer_public_key> <peer_ip>"
+  exit 1
+fi
+
+# Add the new peer to the wg0 interface configuration
+wg set wg0 peer "$peer_public_key" allowed-ips "$peer_ip"
+
+echo "Peer with public key $peer_public_key and IP address $peer_ip added to the wg0 interface."
+
+# Save the current WireGuard configuration to the configuration file
+/build/bin/wg_saveconf

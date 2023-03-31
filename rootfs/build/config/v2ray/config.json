@@ -1,13 +1,16 @@
 {
+  "log": {
+    "loglevel": "debug"
+  },
   "inbounds": [
     {
-      "port": 8443,
+      "port": 4434,
       "protocol": "vmess",
       "settings": {
         "clients": [
           {
-            "id": "b1bea296-acea-46f9-95f1-b5fdc0cefd9c",
-            "alterId": 64
+            "id": "b831381d-6324-4d53-ad4f-8cda48b30811",
+            "alterId": 0
           }
         ]
       }
