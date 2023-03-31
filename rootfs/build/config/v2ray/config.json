@@ -14,6 +14,14 @@
           }
         ]
       }
+    },
+    {
+      "port": 4455,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "chacha20-poly1305",
+        "password": "05178b9e0c2395439bde95a7d3be99cc"
+      }
     }
   ],
   "outbounds": [
